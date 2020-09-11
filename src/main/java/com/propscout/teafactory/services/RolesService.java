@@ -4,6 +4,8 @@ import com.propscout.teafactory.models.entities.Role;
 import com.propscout.teafactory.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,13 +21,25 @@ public class RolesService {
 
         final Optional<Role> optionalRole = roleRepository.findByTitle(role.getTitle());
 
+        //Checking the role already exist
         if (optionalRole.isPresent()) {
             return false;
         }
 
-        final Role savedRole = roleRepository.save(role);
+        //Persisting the role
+        roleRepository.save(role);
 
         return true;
+
+    }
+
+    public List<Role> getAllRoles() {
+
+        List<Role> roles = new ArrayList<>();
+
+        roleRepository.findAll().forEach(roles::add);
+
+        return roles;
 
     }
 }
