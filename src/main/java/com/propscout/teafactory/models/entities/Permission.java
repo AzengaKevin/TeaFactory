@@ -1,4 +1,4 @@
-package com.propscout.TeaFactory.models.entities;
+package com.propscout.teafactory.models.entities;
 
 import javax.persistence.*;
 import java.util.HashSet;

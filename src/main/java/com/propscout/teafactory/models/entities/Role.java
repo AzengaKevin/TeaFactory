@@ -1,7 +1,6 @@
-package com.propscout.TeaFactory.models.entities;
+package com.propscout.teafactory.models.entities;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,14 +25,12 @@ public class Role {
     )
     private Set<Permission> permissions = new HashSet<>();
 
+    public Role() {
+    }
+
     public Role(String title, String description) {
         this.title = title;
         this.description = description;
-    }
-
-    public Role(String title, String description, Permission... permissions) {
-        this(title, description);
-        this.permissions.addAll(Arrays.asList(permissions));
     }
 
     public Integer getId() {
