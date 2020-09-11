@@ -10,102 +10,11 @@
 <body class="bg-gray-100">
 
 <div class="flex" id="wrapper">
-    <div id="sidebar" class="h-screen w-24 md:w-64 bg-green-500 overflow-y-auto">
+    
+    <div th:replace="admin/fragments/sidebar :: sidebar"></div>
 
-        <!-- Sidebar Header -->
-        <div class="h-20 flex justify-center items-center">
-            <div>
-                <svg class="h-12 w-12 fill-current text-white" xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 24 24">
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                    <path
-                            d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
-                </svg>
-            </div>
-            <div class="hidden md:block text-2xl text-white mx-4">Admin</div>
-        </div>
-        <hr>
-
-        <div class="bg-green-500 hover:bg-green-700 p-3">
-            <a class="flex flex-col justify-center md:justify-start items-center md:flex-row"
-               href="/admin/dashboard">
-                <svg class="h-5 w-5 fill-current text-gray-300" xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 24 24">
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
-                </svg>
-                <span
-                        class="text-gray-300 text-xs sm:text-sm md:text-base ml-0 md:ml-3 mt-1 md:mt-0">Dashboard</span>
-            </a>
-        </div>
-        <div class="bg-green-500 hover:bg-green-700 p-3">
-            <a class="flex flex-col justify-center md:justify-start items-center md:flex-row" href="/admin/roles">
-                <svg class="h-5 w-5 fill-current text-gray-300" xmlns="http://www.w3.org/2000/svg"
-                     enable-background="new 0 0 24 24" viewBox="0 0 24 24">
-                    <g>
-                        <rect fill="none" class="h-5 w-5"/>
-                    </g>
-                    <g>
-                        <g>
-                            <path
-                                    d="M17,11c0.34,0,0.67,0.04,1,0.09V6.27L10.5,3L3,6.27v4.91c0,4.54,3.2,8.79,7.5,9.82c0.55-0.13,1.08-0.32,1.6-0.55 C11.41,19.47,11,18.28,11,17C11,13.69,13.69,11,17,11z"/>
-                            <path
-                                    d="M17,13c-2.21,0-4,1.79-4,4c0,2.21,1.79,4,4,4s4-1.79,4-4C21,14.79,19.21,13,17,13z M17,14.38c0.62,0,1.12,0.51,1.12,1.12 s-0.51,1.12-1.12,1.12s-1.12-0.51-1.12-1.12S16.38,14.38,17,14.38z M17,19.75c-0.93,0-1.74-0.46-2.24-1.17 c0.05-0.72,1.51-1.08,2.24-1.08s2.19,0.36,2.24,1.08C18.74,19.29,17.93,19.75,17,19.75z"/>
-                        </g>
-                    </g>
-                </svg>
-                <span class="text-gray-300 text-xs sm:text-sm md:text-base ml-0 md:ml-3 mt-1 md:mt-0">Roles</span>
-            </a>
-        </div>
-    </div>
     <div id="main" class="flex-grow">
-        <div id="top-bar" class="flex justify-between items-center bg-white px-4 py-3 h-20 shadow">
-            <div class="flex items-center">
-                <button id="sidebar-toggler">
-                    <svg class="h-6 w-6 fill-current text-green-500" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-                    </svg>
-                </button>
-                <div class="hidden sm:flex flex-grow  mx-4">
-                    <div class="relative">
-                        <div class="absolute flex justify-center items-center inset-y-0">
-                            <svg class="h-6 w-6 fill-current text-gray-600 p-1" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 24 24">
-                                <path d="M0 0h24v24H0z" fill="none"/>
-                                <path
-                                        d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                            </svg>
-                        </div>
-                        <input class="bg-gray-100 text-gray-600 block rounded-sm pl-10 pr-4 py-1" type="search"
-                               placeholder="Search for..." name="s" id="s">
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center">
-                <div class="block sm:hidden">
-                    <svg class="h-6 w-6 fill-current text-gray-600" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                        <path
-                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
-                </div>
-                <div class="border-solid border-l border-gray-300 h-12 mx-3"></div>
-                <div class="flex items-center">
-                    <div class="hidden lg:block text-gray-600">Azenga Kevin</div>
-                    <div class="ml-3">
-                        <svg class="h-10 w-10 fill-current text-gray-600" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0z" fill="none"/>
-                            <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- End of the top bar -->
+        <div th:replace="admin/fragments/topbar :: topbar"></div>
         <hr>
 
         <div id="content">
