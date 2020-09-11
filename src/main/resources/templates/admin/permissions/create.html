@@ -19,10 +19,10 @@
 
         <div id="content">
             <div class="flex items-center justify-between px-4 py-3">
-                <h4 class="text-xl font-bold">Create Role</h4>
+                <h4 class="text-xl font-bold">Create Permission</h4>
             </div>
 
-            <form class="px-4 py-4" action="/admin/roles" method="post" autocomplete="off">
+            <form class="px-4 py-4" action="/admin/permissions" th:action="@{/admin/permissions}" method="post" autocomplete="off">
                 <div>
                     <label class="block font-medium" for="title">Title</label>
                     <input class="block w-full px-2 py-1" type="text" name="title" placeholder="Title..."
@@ -30,15 +30,8 @@
                 </div>
 
                 <div class="mt-6">
-                    <label class="block font-medium" for="description">Description</label>
-                    <textarea class="block w-full px-2 py-1" name="description" id="description"
-                              placeholder="Description..." rows="5"></textarea>
-                </div>
-
-                <div class="mt-6">
                     <button class="px-4 py-2 rounded bg-green-700 hover:bg-green-900 text-white"
-                            type="submit">Submit
-                    </button>
+                            type="submit">Submit</button>
                 </div>
             </form>
 
