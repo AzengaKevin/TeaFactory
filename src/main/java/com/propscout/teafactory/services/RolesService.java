@@ -42,4 +42,23 @@ public class RolesService {
         return roles;
 
     }
+
+    public Optional<Role> getRoleById(Integer id) {
+
+        return roleRepository.findById(id);
+
+    }
+
+    public Optional<Role> updateRoleById(Role role) {
+
+        if (roleRepository.existsById(role.getId())) {
+
+            return Optional.of(roleRepository.save(role));
+
+        } else {
+
+            return Optional.empty();
+
+        }
+    }
 }
