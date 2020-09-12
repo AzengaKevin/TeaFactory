@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title} + ' | ' + ${app}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="all" th:href="@{/css/app.css}" href="/css/app.css">
+</head>
+
+<body class="bg-gray-100">
+
+<div id="wrapper" class="h-screen bg-gray-100">
+    <form th:action="@{/login}" method="POST">
+
+        <div class="">
+            <label class="" for="email"></label>
+            <input type="email" id="email" name="email" placeholder="Email Address..."
+                   class="form-control"/>
+        </div>
+
+        <div class="">
+            <label for="password" class=""></label>
+            <input type="password" placeholder="Password..."
+                   id="password" name="password" class="form-control"/>
+        </div>
+
+        <div>
+            <button class="px-4 py-2 rounded bg-green-700 text-white" type="submit">Login</button>
+        </div>
+    </form>
+</div>
+
+
+<script src="/js/app.js" th:inline="javascript" th:src="@{/js/app.js}"></script>
+
+</body>
+</html>

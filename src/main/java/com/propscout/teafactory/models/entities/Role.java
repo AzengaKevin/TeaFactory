@@ -1,7 +1,9 @@
 package com.propscout.teafactory.models.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,10 +27,19 @@ public class Role {
     )
     private Set<Permission> permissions = new HashSet<>();
 
+    @OneToMany(mappedBy = "role")
+    private List<User> users = new ArrayList<>();
+
     public Role() {
     }
 
     public Role(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public Role(Integer id, String title, String description) {
+        this.id = id;
         this.title = title;
         this.description = description;
     }
@@ -67,6 +78,14 @@ public class Role {
 
     public void addPermission(Permission permission) {
         this.permissions.add(permission);
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override

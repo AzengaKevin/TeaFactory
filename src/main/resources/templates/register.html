@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title} + ' | ' + ${app}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" media="all" th:href="@{/css/app.css}" href="/css/app.css">
+</head>
+
+<body>
+<div class="wrapper">
+
+    <form th:action="@{/register}" th:object="${user}" method="post">
+
+        <div class="">
+            <div class="">
+                <label for="name">Name</label>
+                <input id="name" type="text" th:field="*{name}" placeholder="Name..." class=""/>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <label for="email">Email</label>
+                <input id="email" type="text" th:field="*{email}" placeholder="Email..." class=""/>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <label for="nationalId">ID Number</label>
+                <input id="nationalId" type="text" th:field="*{nationalId}" placeholder="ID Number" class=""/>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <label for="password">Password</label>
+                <input id="password" type="password" th:field="*{password}" placeholder="Password" class=""/>
+            </div>
+        </div>
+
+        <div class="">
+            <button type="submit" class="">Register</button>
+        </div>
+    </form>
+</div>
+
+<script src="/js/app.js" th:inline="javascript" th:src="@{/js/app.js}"></script>
+</body>
+</html>
