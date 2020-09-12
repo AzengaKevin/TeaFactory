@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,5 +56,28 @@ public class UsersService {
         optionalRole.ifPresent(user::setRole);
 
         return userRepository.save(user);
+    }
+
+    public List<User> getAllUsers() {
+
+        List<User> users = new ArrayList<>();
+
+        userRepository.findAll().forEach(users::add);
+
+        return users;
+    }
+
+
+    public boolean updateUserById(User user) {
+
+        Optional<User> optionalUser = userRepository.findById(user.getId());
+
+        if (optionalUser.isEmpty()) {
+            return false;
+        }
+
+        userRepository.save(user);
+
+        return true;
     }
 }
