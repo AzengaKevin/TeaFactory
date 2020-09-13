@@ -72,10 +72,15 @@ public class UsersService {
 
         Optional<User> optionalUser = userRepository.findById(user.getId());
 
+        //Check whether a user with that Id exits
         if (optionalUser.isEmpty()) {
             return false;
         }
 
+        //Maintain the password though
+        user.setPassword(optionalUser.get().getPassword());
+
+        //Save the updated user
         userRepository.save(user);
 
         return true;

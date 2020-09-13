@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -31,7 +32,10 @@ public class RegisterController {
     }
 
     @GetMapping
-    public String showForm(Model model) {
+    public String showForm(Model model, Principal principal) {
+
+        //If the user is already authenticated redirect to the home page
+        if (principal != null) return "redirect:/";
 
         model.addAttribute("app", app);
         model.addAttribute("title", "Register");
@@ -42,9 +46,6 @@ public class RegisterController {
 
     @PostMapping
     public String registerUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
-
-        logger.info("=====================Registration====================");
-        logger.info(user.toString());
 
         Optional<User> userOption = usersService.getUserByEmail(user.getEmail());
 

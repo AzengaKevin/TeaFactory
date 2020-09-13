@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("admin/dashboard")
-public class DashboardController {
+public class AdminDashboardController {
 
     @Value("${app.title}")
     private String app;

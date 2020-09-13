@@ -1,6 +1,8 @@
 package com.propscout.teafactory.models.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "centers")
@@ -16,6 +18,9 @@ public class Center {
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+
+    @OneToMany(mappedBy = "center")
+    private List<Account> accounts = new ArrayList<>();
 
     public Center() {
     }
@@ -51,5 +56,13 @@ public class Center {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }
