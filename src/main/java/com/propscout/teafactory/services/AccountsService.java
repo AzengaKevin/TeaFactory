@@ -41,8 +41,23 @@ public class AccountsService {
             return false;
         }
 
-        accountRepository.save(account);
+        Account updatedAccount = optionalAccount.get();
+        updatedAccount.setTransactionAccNo(account.getTransactionAccNo());
+        updatedAccount.setCenter(account.getCenter());
+
+        accountRepository.save(updatedAccount);
 
         return true;
+    }
+
+    public void deleteAccount(Integer accountId) {
+
+        //Try getting the account that Id
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+
+        if (optionalAccount.isEmpty()) return;
+
+        accountRepository.delete(optionalAccount.get());
+
     }
 }

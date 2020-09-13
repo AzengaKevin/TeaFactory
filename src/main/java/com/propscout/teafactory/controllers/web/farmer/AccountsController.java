@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Optional;
@@ -44,7 +41,7 @@ public class AccountsController {
     }
 
     @GetMapping
-    public String index(Principal principal, Model model) {
+    public String index(Principal principal, Model model) throws Exception {
 
         if (principal == null) return "redirect:/login";
 
@@ -75,11 +72,88 @@ public class AccountsController {
     @PostMapping
     public String store(@ModelAttribute("account") Account account, Principal principal) {
 
-        //Set the account for this user
+        //Logg email for the current user
         logger.info(principal.getName());
 
-        accountsService.addAccount(account);
+        //Current logged in users email
+        String email = principal.getName();
+        Optional<User> optionalLoggedInUser = usersService.getUserByEmail(email);
 
-        return "redirect:/farmer/accounts";
+        //Set the user for the account
+        account.setUser(optionalLoggedInUser.get());
+
+        if (accountsService.addAccount(account)) {
+            return "redirect:/farmer/accounts";
+        }
+
+        return "redirect:/farmer/accounts/create";
     }
+
+    @GetMapping("{accountId}")
+    public String show(
+            @PathVariable("accountId") Integer accountId,
+            Model model
+    ) {
+        //Try getting the account based on the id
+        Optional<Account> optionalAccount = accountsService.getAccountById(accountId);
+
+        //Check if the account really exists
+        if (optionalAccount.isEmpty()) {
+            return "redirect:/farmer/accounts";
+        }
+
+        //Set the view attributes to the model
+        model.addAttribute("app", app);
+        model.addAttribute("title", "User Account");
+        model.addAttribute("account", optionalAccount.get());
+
+        return "farmer/accounts/show";
+    }
+
+    @GetMapping("{accountId}/edit")
+    public String edit(
+            @PathVariable("accountId") Integer accountId,
+            Model model
+    ) {
+        //Try getting the account based on the id
+        Optional<Account> optionalAccount = accountsService.getAccountById(accountId);
+
+        //Check if the account really exists
+        if (optionalAccount.isEmpty()) {
+            return "redirect:/farmer/accounts";
+        }
+
+        //Set the view attributes to the model
+        model.addAttribute("app", app);
+        model.addAttribute("title", "User Account");
+        model.addAttribute("account", optionalAccount.get());
+        model.addAttribute("centers", centersService.getAllCenters());
+
+        return "farmer/accounts/edit";
+    }
+
+    @PostMapping("{accountId}")
+    public String update(
+            @PathVariable("accountId") Integer accountId,
+            Account account
+    ) {
+        //Set the account id
+        account.setId(accountId);
+
+        //Try updating the account if it exists
+        if (accountsService.updateAccount(account)) {
+            return "redirect:/farmer/accounts/" + accountId;
+        }
+
+        return "redirect:/farmer/account/" + accountId + "/edit";
+    }
+
+    @PostMapping("{accountId}/delete")
+    public String destroy(@PathVariable("accountId") Integer accountId) {
+
+        accountsService.deleteAccount(accountId);
+
+        return "redirect:/farmer/accounts/";
+    }
+
 }
