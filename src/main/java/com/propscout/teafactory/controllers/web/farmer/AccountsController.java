@@ -3,6 +3,7 @@ package com.propscout.teafactory.controllers.web.farmer;
 import com.propscout.teafactory.models.entities.Account;
 import com.propscout.teafactory.models.entities.User;
 import com.propscout.teafactory.services.AccountsService;
+import com.propscout.teafactory.services.CentersService;
 import com.propscout.teafactory.services.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,10 +31,16 @@ public class AccountsController {
 
     private final AccountsService accountsService;
     private final UsersService usersService;
+    private final CentersService centersService;
 
-    public AccountsController(AccountsService accountsService, UsersService usersService) {
+    public AccountsController(
+            AccountsService accountsService,
+            UsersService usersService,
+            CentersService centersService
+    ) {
         this.accountsService = accountsService;
         this.usersService = usersService;
+        this.centersService = centersService;
     }
 
     @GetMapping
@@ -60,9 +67,9 @@ public class AccountsController {
         model.addAttribute("app", app);
         model.addAttribute("title", "Create Account");
         model.addAttribute("account", new Account());
+        model.addAttribute("centers", centersService.getAllCenters());
 
         return "farmer/accounts/create";
-
     }
 
     @PostMapping
