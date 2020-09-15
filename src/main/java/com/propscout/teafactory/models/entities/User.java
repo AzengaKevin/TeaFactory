@@ -9,7 +9,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "national_id", unique = true)
@@ -28,6 +28,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Account> accounts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<ScheduleItem> scheduleItems = new ArrayList<>();
 
     public User() {
     }
@@ -101,6 +104,14 @@ public class User {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public List<ScheduleItem> getScheduleItems() {
+        return scheduleItems;
+    }
+
+    public void setScheduleItems(List<ScheduleItem> scheduleItems) {
+        this.scheduleItems = scheduleItems;
     }
 
     @Override

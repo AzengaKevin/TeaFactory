@@ -9,7 +9,7 @@ import java.util.List;
 public class Center {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true, nullable = false)
@@ -21,6 +21,9 @@ public class Center {
 
     @OneToMany(mappedBy = "center")
     private List<Account> accounts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "center")
+    private List<ScheduleItem> scheduleItems = new ArrayList<>();
 
     public Center() {
     }
@@ -64,5 +67,13 @@ public class Center {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public List<ScheduleItem> getScheduleItems() {
+        return scheduleItems;
+    }
+
+    public void setScheduleItems(List<ScheduleItem> scheduleItems) {
+        this.scheduleItems = scheduleItems;
     }
 }

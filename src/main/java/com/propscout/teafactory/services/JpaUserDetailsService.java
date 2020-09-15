@@ -29,4 +29,5 @@ public class JpaUserDetailsService implements UserDetailsService {
 
         return optionalUser.map(UserAdapter::new).get();
     }
+
 }

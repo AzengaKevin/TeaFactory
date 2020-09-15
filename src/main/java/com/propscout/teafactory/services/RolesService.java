@@ -49,6 +49,12 @@ public class RolesService {
 
     }
 
+    public Optional<Role> getRoleByTitle(String title) {
+
+        return roleRepository.findByTitle(title);
+
+    }
+
     public Optional<Role> updateRoleById(Role role) {
 
         if (roleRepository.existsById(role.getId())) {
