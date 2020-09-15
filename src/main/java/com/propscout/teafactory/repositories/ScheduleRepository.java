@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface ScheduleRepository extends CrudRepository<ScheduleItem, Long> {
 
     @Query("SELECT s FROM ScheduleItem s WHERE s.month = :month AND s.daytime = :daytime")
-    Optional<ScheduleItem> findByMonthAndTime(@Param("month") Integer month, @Param("daytime") LocalTime localTime);
+    Optional<ScheduleItem> findByMonthAndTime(@Param("month") Integer month, @Param("daytime") LocalTime daytime);
 
 }

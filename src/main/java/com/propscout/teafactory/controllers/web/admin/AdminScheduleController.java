@@ -1,11 +1,14 @@
 package com.propscout.teafactory.controllers.web.admin;
 
+import com.propscout.teafactory.models.dtos.ScheduleItemDto;
 import com.propscout.teafactory.models.entities.Role;
 import com.propscout.teafactory.models.entities.ScheduleItem;
 import com.propscout.teafactory.models.entities.User;
 import com.propscout.teafactory.services.CentersService;
 import com.propscout.teafactory.services.RolesService;
 import com.propscout.teafactory.services.ScheduleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,8 @@ import java.util.Optional;
 @Controller
 @RequestMapping("admin/schedule")
 public class AdminScheduleController {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Value("${app.title}")
     private String app;
@@ -47,7 +52,8 @@ public class AdminScheduleController {
     }
 
     @PostMapping
-    public String store(ScheduleItem scheduleItem) {
+    public String store(@ModelAttribute ScheduleItemDto scheduleItem) {
+        System.out.println(scheduleItem);
 
         if (scheduleService.addScheduleItem(scheduleItem)) {
             return "redirect:/admin/schedule";
@@ -65,7 +71,7 @@ public class AdminScheduleController {
 
         model.addAttribute("scheduleItem", new ScheduleItem());
 
-        model.addAttribute("clerks", getClerks());
+        model.addAttribute("users", getClerks());
 
         model.addAttribute("centers", centersService.getAllCenters());
 
@@ -85,7 +91,7 @@ public class AdminScheduleController {
 
         model.addAttribute("app", app);
         model.addAttribute("title", "Schedule Item");
-        model.addAttribute("center", optionalScheduleItem.get());
+        model.addAttribute("scheduleItem", optionalScheduleItem.get());
 
         return "admin/schedule/show";
     }
@@ -107,7 +113,7 @@ public class AdminScheduleController {
 
         model.addAttribute("scheduleItem", optionalScheduleItem.get());
 
-        model.addAttribute("clerks", getClerks());
+        model.addAttribute("users", getClerks());
 
         model.addAttribute("centers", centersService.getAllCenters());
 
@@ -117,12 +123,12 @@ public class AdminScheduleController {
     @PostMapping("{scheduleItemId}")
     public String update(
             @PathVariable("scheduleItemId") Long scheduleItemId,
-            @ModelAttribute("center") ScheduleItem center
+            @ModelAttribute ScheduleItemDto scheduleItemDto
     ) {
 
-        center.setId(scheduleItemId);
+        scheduleItemDto.setId(scheduleItemId);
 
-        if (!scheduleService.updateScheduleItemById(center)) {
+        if (!scheduleService.updateScheduleItemById(scheduleItemDto)) {
             return "redirect:/admin/schedule/" + scheduleItemId + "/edit";
         }
 
