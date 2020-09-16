@@ -25,6 +25,9 @@ public class Center {
     @OneToMany(mappedBy = "center")
     private List<ScheduleItem> scheduleItems = new ArrayList<>();
 
+    @OneToMany(mappedBy = "center")
+    private List<TeaRecord> teaRecordList = new ArrayList<>();
+
     public Center() {
     }
 
@@ -75,5 +78,13 @@ public class Center {
 
     public void setScheduleItems(List<ScheduleItem> scheduleItems) {
         this.scheduleItems = scheduleItems;
+    }
+
+    public List<TeaRecord> getTeaRecordList() {
+        return teaRecordList;
+    }
+
+    public void setTeaRecordList(List<TeaRecord> teaRecordList) {
+        this.teaRecordList = teaRecordList;
     }
 }

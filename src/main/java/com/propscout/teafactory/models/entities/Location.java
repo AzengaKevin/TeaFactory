@@ -65,4 +65,6 @@ public class Location {
     public void setCenters(List<Center> centers) {
         this.centers = centers;
     }
+
+
 }

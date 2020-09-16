@@ -5,6 +5,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "accounts")
@@ -35,6 +37,10 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "center_id")
     private Center center;
+
+
+    @OneToMany(mappedBy = "account")
+    private List<TeaRecord> teaRecordItems = new ArrayList<>();
 
     public Account() {
     }
@@ -97,6 +103,14 @@ public class Account {
 
     public void setCenter(Center center) {
         this.center = center;
+    }
+
+    public List<TeaRecord> getTeaRecordItems() {
+        return teaRecordItems;
+    }
+
+    public void setTeaRecordItems(List<TeaRecord> teaRecordItems) {
+        this.teaRecordItems = teaRecordItems;
     }
 
     @Override

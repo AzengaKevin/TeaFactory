@@ -18,7 +18,7 @@ public class LocationsController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Value("app.title")
+    @Value("${app.title}")
     private String app;
 
     private final LocationsService locationsService;
