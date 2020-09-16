@@ -45,15 +45,15 @@
                                 <div class="rounded-md bg-white shadow-xs">
                                     <div class="py-1" role="menu" aria-orientation="vertical"
                                         aria-labelledby="options-menu">
-                                        <a href="/admin/dashboard" th:href="@{/admin/dashboard}"
+                                        <a th:if="${user.role.title == 'Admin'}" href="/admin/dashboard" th:href="@{/admin/dashboard}"
                                             class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-                                            role="menuitem">Admin Dashboard</a>
-                                        <a href="/admin/dashboard" th:href="@{/clerk/dashboard}"
+                                            role="menuitem">Dashboard</a>
+                                        <a th:if="${user.role.title == 'Clerk'}" href="/admin/dashboard" th:href="@{/clerk/dashboard}"
                                            class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-                                           role="menuitem">Clerk Dashboard</a>
-                                        <a href="/farmer/dashboard" th:href="@{/farmer/dashboard}"
+                                           role="menuitem">Dashboard</a>
+                                        <a th:if="${user.role.title == 'Farmer'}" href="/farmer/dashboard" th:href="@{/farmer/dashboard}"
                                             class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-                                            role="menuitem">Farmer Dashboard</a>
+                                            role="menuitem">Dashboard</a>
                                         <form method="POST" th:action="@{/logout}">
                                             <button type="submit"
                                                 class="block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
