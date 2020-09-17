@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -31,5 +32,14 @@ public class AdminTeaRecordsController {
 
         return "admin/records/index";
 
+    }
+
+    @PostMapping("pay")
+    public String store() {
+        //Initiate farmers payment
+        teaRecordsService.payFarmers();
+
+        //Return to the previous page
+        return "redirect:/admin/records";
     }
 }
